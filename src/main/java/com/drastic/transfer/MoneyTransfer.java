@@ -43,7 +43,13 @@ public class MoneyTransfer implements Transferable {
             writeLock.unlock();
         }
 
+        list();
+    }
+
+    public void list()  {
+        readLock.lock();
         store.forEach((key, value) -> System.out.println(key + " " + value));
         System.out.println();
+        readLock.unlock();
     }
 }

@@ -32,7 +32,7 @@ public final class Request implements Runnable {
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
             String headerLine;
             while ((headerLine = reader.readLine()).length() != 0) {
-//                System.out.println(headerLine);
+                System.out.println(headerLine);
             }
             StringBuilder payload = new StringBuilder();
             while (reader.ready()) {
