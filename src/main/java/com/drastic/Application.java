@@ -27,8 +27,9 @@ public class Application {
             while (true) {
                 Socket socket = serverSocket.accept();
                 System.out.println("New client connected");
-
-                new Thread(new Request(socket, transferMaker)).start();
+                Thread thread;
+                Runtime.getRuntime().addShutdownHook(thread = new Thread(new Request(socket, transferMaker)));
+                thread.start();
             }
 
         } catch (IOException e) {

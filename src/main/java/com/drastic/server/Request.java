@@ -2,7 +2,7 @@ package com.drastic.server;
 
 import com.drastic.exception.InsufficientFundsException;
 import com.drastic.exception.NegativeAmountException;
-import com.drastic.exception.NoCounterpartyFound;
+import com.drastic.exception.NoCounterpartyFoundException;
 import com.drastic.transfer.model.Transfer;
 import com.drastic.transfer.TransferMaker;
 import com.google.gson.Gson;
@@ -10,6 +10,8 @@ import com.google.gson.GsonBuilder;
 
 import java.io.*;
 import java.net.Socket;
+
+import static com.drastic.server.StatusConstants.*;
 
 public final class Request implements Runnable {
 
@@ -26,7 +28,7 @@ public final class Request implements Runnable {
 
     public void run() {
         Status status = new Status();
-        status.setStatus("UNDEFINED");
+        status.setStatus(UNDEFINED);
         try {
             InputStream input = socket.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
@@ -40,9 +42,9 @@ public final class Request implements Runnable {
             }
             Transfer transfer = gson.fromJson(payload.toString(), Transfer.class);
             transferMaker.makeTransfer(transfer);
-            status.setStatus("TRANSFERRED");
-        } catch (IOException | NoCounterpartyFound | InsufficientFundsException | NegativeAmountException ex) {
-            status.setStatus("FAILED");
+            status.setStatus(TRANSFERRED);
+        } catch (IOException | NoCounterpartyFoundException | InsufficientFundsException | NegativeAmountException ex) {
+            status.setStatus(FAILED);
             System.out.println("Server exception: " + ex.getMessage());
             ex.printStackTrace();
         } finally {
