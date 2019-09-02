@@ -19,3 +19,9 @@ Implicit requirements:
 1. The code produced by you is expected to be of high quality.
 2. There are no detailed requirements, use common sense.
 Please put your work on github or bitbucket.
+
+==========================================================================================
+how to run:
+  mvn clean package
+  cd target
+  java -jar revolut-1.0-SNAPSHOT.jar 8080
