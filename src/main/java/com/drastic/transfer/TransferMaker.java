@@ -3,6 +3,7 @@ package com.drastic.transfer;
 import com.drastic.exception.InsufficientFundsException;
 import com.drastic.exception.NegativeAmountException;
 import com.drastic.exception.NoCounterpartyFound;
+import com.drastic.transfer.model.Transfer;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -16,7 +17,7 @@ public class TransferMaker {
         this.transferable = transferable;
     }
 
-    public void makeTransfer(Transfer moneyTranfer) throws NoCounterpartyFound, InsufficientFundsException, NegativeAmountException {
-        transferable.transfer(moneyTranfer);
+    public void makeTransfer(Transfer moneyTransfer) throws NoCounterpartyFound, InsufficientFundsException, NegativeAmountException {
+        transferable.transfer(moneyTransfer);
     }
 }

@@ -1,4 +1,4 @@
-package com.drastic.transfer;
+package com.drastic.transfer.model;
 
 import java.math.BigDecimal;
 import java.util.Objects;

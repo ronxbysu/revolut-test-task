@@ -1,11 +1,13 @@
 package com.drastic.transfer;
 
+import com.drastic.Database;
 import com.drastic.exception.InsufficientFundsException;
 import com.drastic.exception.NegativeAmountException;
 import com.drastic.exception.NoCounterpartyFound;
+import com.drastic.transfer.model.Transfer;
+import com.google.inject.Inject;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -18,13 +20,12 @@ public class MoneyTransfer implements Transferable {
     private Lock writeLock;
     private Map<String, BigDecimal> store;
 
-    public MoneyTransfer() {
+    @Inject
+    public MoneyTransfer(Database database) {
         lock = new ReentrantReadWriteLock();
         readLock = lock.readLock();
         writeLock = lock.writeLock();
-        store = new HashMap<String, BigDecimal>() {{
-            put("CashMachine", new BigDecimal(1000));
-        }};
+        store = database.getStore();
     }
 
     public void transfer(Transfer moneyTransfer) throws NoCounterpartyFound, InsufficientFundsException, NegativeAmountException {

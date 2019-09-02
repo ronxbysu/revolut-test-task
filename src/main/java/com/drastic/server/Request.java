@@ -3,7 +3,7 @@ package com.drastic.server;
 import com.drastic.exception.InsufficientFundsException;
 import com.drastic.exception.NegativeAmountException;
 import com.drastic.exception.NoCounterpartyFound;
-import com.drastic.transfer.Transfer;
+import com.drastic.transfer.model.Transfer;
 import com.drastic.transfer.TransferMaker;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
